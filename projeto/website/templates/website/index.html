@@ -1,0 +1,20 @@
+{% extends 'website/layout.html' %}
+
+{% block jumbotron %}
+<div class="jumbotron">
+    <h1 class="display-4">Início</h1>
+</div>
+{% endblock %}
+
+{% block main %}
+<main class="container text-center">
+    {% load static %}
+    <img src="{% static 'website/images/indexTC.png' %}" style="margin-bottom: 20px;">
+    <p>A teoria da computação é um subcampo da ciência da computação e matemática que procura determinar que problemas podem ser computados 
+    num dado modelo de computação. A computação pode ser definida como a solução de um problema ou, formalmente, o cálculo de uma função 
+    por meio de um algoritmo. Apesar de intuitivo na história humana, o conceito de execução de uma tarefa com passos finitos 
+    a fim de se obter um resultado, ou seja, um algoritmo, não possuía uma definição formal até à conceituação do modelo de 
+    Máquina Universal de Turing.</p>
+    <p><b>Website criado no âmbito da Unidade Curricular de Teoria da Computação.</b></p>
+</main>
+{% endblock %}

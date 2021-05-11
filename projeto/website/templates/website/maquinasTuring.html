@@ -1,0 +1,53 @@
+{% extends 'website/layout.html' %}
+
+{% block jumbotron %}
+<div class="jumbotron">
+    <h1 class="display-4">Máquinas de Turing</h1>
+</div>
+{% endblock %}
+
+{% block main %}
+<main class="container text-justify">
+    <a href="{% url 'website:novaMaquina' %}" class="btn btn-success btn-sm btn-block">
+        Crie uma Máquina de Turing
+    </a>
+    <p style="margin-top: 20px;">Apresentam-se em baixo as máquinas de turing que foram criadas.</p>
+    <table align="center" class="table" style="table-layout: fixed; width:900px;">
+        <tr>
+            <th class="text-center" style="width:400px;">Diagrama de Estados</th>
+            <th class="text-center" style="width:500px;">Descrição</th>
+        </tr>
+        {% load static %}
+        {% for maquina in maquinasTuring %}
+            <tr class="text-left">
+                <td style="vertical-align: middle; width:400px;">
+                    <a href="{% url 'website:detalhesMaquina' maquina.id %}">
+                        <img src="{% static maquina.diagrama %}" width="80%">
+                    </a>
+                </td>
+                <td style="vertical-align: middle; width:500px;">
+                    <p>{{ maquina.descricao }}</p>
+                    <p>
+                        <div class="row">
+                            <a href="{% url 'website:detalhesMaquina' maquina.id %}" class="btn btn-info btn-sm col-sm" style="margin: 5px;">
+                                Detalhes
+                            </a>
+                            <a href="{% url 'website:detalhesMaquina' maquina.id %}" class="btn btn-success btn-sm col-sm" style="margin: 5px;">
+                                Validar Sequência
+                            </a>
+                        </div>
+                        <div class="row">
+                            <a href="{% url 'website:editarMaquina' maquina.id %}" class="btn btn-warning btn-sm col-sm" style="margin: 5px;">
+                                Editar
+                            </a>
+                            <a href="{% url 'website:apagarMaquina' maquina.id %}" class="btn btn-danger btn-sm col-sm" style="margin: 5px;">
+                                Apagar
+                            </a>
+                        </div>
+                    </p>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+</main>
+{% endblock %}

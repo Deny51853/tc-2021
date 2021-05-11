@@ -1,0 +1,30 @@
+{% extends 'website/layout.html' %}
+
+{% block jumbotron %}
+<div class="jumbotron">
+    <h1 class="display-4">Detalhes da Expressão Regular</h1>
+</div>
+{% endblock %}
+
+{% block main %}
+<main class="container text-justify">
+    <h3>{{ expressao.nome|title }}</h3>
+    <p>{{ expressao.descricao }}.</p>
+    <p>{{ expressao.regex }}.</p>
+    <p><b>Validador:</b> Insira uma sequência e verifique se é validada pela expressão regular: </p>
+    <form action="{% url 'website:detalhesExpressao' expressao.id %}" method="POST">
+        {% csrf_token %}
+        <b>{{ form }}</b>
+        <input type="submit" value="Validar" class="btn btn-success">
+    </form>
+    {% if resultado != None %}
+        {% if resultado == True %}
+            <p>A sequência <b>{{ sequencia }}</b> é válida.</p>
+        {% else %}
+            <p>A sequência <b>{{ sequencia }}</b> não é válida.</p>
+        {% endif %}
+    {% else %}
+        <p></p>
+    {% endif %}
+</main>
+{% endblock %}

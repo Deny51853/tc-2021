@@ -1,0 +1,22 @@
+{% extends 'website/layout.html' %}
+
+{% block jumbotron %}
+<div class="jumbotron">
+    <h1 class="display-4">Nova Máquina de Turing</h1>
+</div>
+{% endblock %}
+
+{% block main %}
+<main class="container text-justify">
+    <h3>Máquina de Turing</h3>
+    <p>Pode aqui especificar uma nova máquina de turing que ficará armazenada na base de dados, juntamente com o seu diagrama. A máquina de turing será implementada e poderá ser usada.</p>
+    <form class="form-group" action="{% url 'website:novaMaquina' %}" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="text-right">
+            <a href="{% url 'website:maquinasTuring' %}" role="button" class="btn btn-warning">Cancelar</a>
+            <input type="submit" class="btn btn-success" value="Submeter">
+        </div>
+    </form>
+</main>
+{% endblock %}

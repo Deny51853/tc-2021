@@ -1,0 +1,13 @@
+digraph teste {
+	graph [rankdir=LR]
+	node [shape=circle]
+	edge [arrowhead=vee arrowsize=1]
+	Start [label="" shape=none]
+	A
+	B [shape=doublecircle]
+	Start -> A
+	A -> A [label=1]
+	A -> B [label=0]
+	B -> B [label=0]
+	B -> A [label=1]
+}

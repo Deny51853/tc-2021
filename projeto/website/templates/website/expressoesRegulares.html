@@ -1,0 +1,53 @@
+{% extends 'website/layout.html' %}
+
+{% block jumbotron %}
+<div class="jumbotron">
+    <h1 class="display-4">Expressões Regulares</h1>
+</div>
+{% endblock %}
+
+{% block main %}
+<main class="container text-justify">
+    <a href="{% url 'website:novaExpressao' %}" class="btn btn-success btn-sm btn-block">
+        Crie uma Expressão Regular
+    </a>
+    <p style="margin-top: 20px;">Apresentam-se em baixo as expressões que foram criadas.</p>
+    <table align="center" class="table" style="table-layout: fixed; width: 900px">
+        <tr>
+            <th class="text-center" style="width: 400px;">Expressão Regular</th>
+            <th class="text-center" style="width: 500px;">Descrição</th>
+        </tr>
+        {% load static %}
+        {% for expressao in expressoesRegulares %}
+            <tr class="text-left">
+                <td style="vertical-align: middle; width: 400px;">
+                    <a href="{% url 'website:detalhesExpressao' expressao.id %}" class="text-center" style="vertical-align:center;">
+                        <p width="80%"><b>{{ expressao.regex }}</b></p>
+                    </a>
+                </td>
+                <td style="vertical-align: middle; width: 500px;">
+                    <p>{{ expressao.descricao }}</p>
+                    <p>
+                        <div class="row">
+                            <a href="{% url 'website:detalhesExpressao' expressao.id %}" class="btn btn-info btn-sm col-sm" style="margin: 5px;">
+                                Detalhes
+                            </a>
+                            <a href="{% url 'website:detalhesExpressao' expressao.id %}" class="btn btn-success btn-sm col-sm" style="margin: 5px;">
+                                Validar Sequência
+                            </a>
+                        </div>
+                        <div class="row">
+                            <a href="{% url 'website:editarExpressao' expressao.id %}" class="btn btn-warning btn-sm col-sm" style="margin: 5px;">
+                                Editar
+                            </a>
+                            <a href="{% url 'website:apagarExpressao' expressao.id %}" class="btn btn-danger btn-sm col-sm" style="margin: 5px;">
+                                Apagar
+                            </a>
+                        </div>
+                    </p>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+</main>
+{% endblock %}

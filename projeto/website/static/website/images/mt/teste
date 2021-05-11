@@ -1,0 +1,20 @@
+digraph teste {
+	graph [rankdir=LR]
+	node [shape=circle]
+	edge [arrowhead=vee arrowsize=1]
+	Start [label="" shape=none]
+	C
+	T
+	A
+	B
+	D [shape=doublecircle]
+	Start -> A
+	A -> T [label="11R"]
+	A -> B [label="0XR"]
+	B -> B [label="1YR"]
+	B -> T [label="@@R"]
+	B -> C [label="0XR"]
+	C -> T [label="11R"]
+	C -> T [label="00R"]
+	C -> D [label="@@R"]
+}

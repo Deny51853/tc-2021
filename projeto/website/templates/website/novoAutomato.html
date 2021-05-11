@@ -1,0 +1,22 @@
+{% extends 'website/layout.html' %}
+
+{% block jumbotron %}
+<div class="jumbotron">
+    <h1 class="display-4">Novo Autómato Finito Determinístico</h1>
+</div>
+{% endblock %}
+
+{% block main %}
+<main class="container text-justify">
+    <h3>Autómato Finito Determinístico</h3>
+    <p>Pode aqui especificar um novo autómato finito determinístico que ficará armazenado na base de dados, juntamente com o seu diagrama. O autómato finito determinístico será implementado e poderá ser usado.</p>
+    <form class="form-group" action="{% url 'website:novoAutomato' %}" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="text-right">
+            <a href="{% url 'website:automatosFinitos' %}" role="button" class="btn btn-warning">Cancelar</a>
+            <input type="submit" class="btn btn-success" value="Submeter">
+        </div>
+    </form>
+</main>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'website/layout.html' %}
+
+{% block jumbotron %}
+<div class="jumbotron">
+    <h1 class="display-4">Detalhes da Expressao Regular</h1>
+</div>
+{% endblock %}
+
+{% block main %}
+<main class="container text-justify">
+    <h3>Expressão Regular</h3>
+    <p>Pode aqui especificar uma nova expressão regular que ficará armazenada na base de dados. A expressão regular será implementada e poderá ser usada.</p>
+    <form class="form-group" action="{% url 'website:editarExpressao' expressao_id %}" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="text-right">
+            <a href="{% url 'website:expressoesRegulares' %}" role="button" class="btn btn-warning">Cancelar</a>
+            <input type="submit" class="btn btn-success" value="Submeter">
+        </div>
+    </form>
+</main>
+{% endblock %}

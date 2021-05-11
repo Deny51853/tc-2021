@@ -1,0 +1,64 @@
+{% extends 'website/layout.html' %}
+
+{% block jumbotron %}
+<div class="jumbotron">
+    <h1 class="display-4">Detalhes do Autómato Finito Determinístico</h1>
+</div>
+{% endblock %}
+
+{% block main %}
+<main class="container text-justify">
+    <h3>{{ automato.nome|title }}</h3>
+    <p>{{ automato.descricao }}.</p>
+    <table align="center">
+        <tr align="left">
+            <td>
+                <p><b>Quíntuplo do autómato finito determinístico:</b></p>
+                <ul>
+                    <li>Alfabeto: {{ automato.printAlfabeto }} </li>
+                    <li>Estados: {{ automato.printEstados }}</li>
+                    <li>Estado inicial: {{ automato.estadoInicial }}</li>
+                    <li>Estados de aceitação: {{ automato.printEstadosAceitacao }}</li>
+                    <li>Tabela de transições:
+                        <table align="center" rules="all" style="border-collapse: collapse">
+                            {% for dicTransicoes in automato.printDicTransicoes %}
+                                <tr>
+                                    {% for element in dicTransicoes %}
+                                        {% if forloop.parentloop.first %}
+                                            <th>{{ element }}</th>
+                                        {% elif forloop.first %}
+                                            <th>{{ element }}</th>
+                                        {% else %}
+                                            <td>{{ element }}</td>
+                                        {% endif %}
+                                    {% endfor %}
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    </li>
+                </ul>
+            </td>
+            <td class="align-baseline">
+                {% load static %}
+                <img src="{% static automato.diagrama %}" alt="">
+                <p class="text-center">Diagrama de transições.</p>
+            </td>
+        </tr>
+    </table>
+    <p><b>Validador:</b> Insira uma sequência e verifique se pertence à linguagem que o autómato finito determinístico reconhece: </p>
+    <form action="{% url 'website:detalhesAutomato' automato.id %}" method="POST">
+        {% csrf_token %}
+        <b>{{ form }}</b>
+        <input type="submit" value="Validar" class="btn btn-success">
+    </form>
+    {% if resultado != None %}
+        {% if resultado == True %}
+            <p>A sequência <b>{{ sequencia }}</b> é aceite pelo autómato finito determinístico.</p>
+        {% else %}
+            <p>A sequência <b>{{ sequencia }}</b> não é aceite pelo autómato finito determinístico.</p>
+        {% endif %}
+    {% else %}
+        <p></p>
+    {% endif %}
+</main>
+{% endblock %}
