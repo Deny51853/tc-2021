@@ -1,4 +1,4 @@
-digraph teste {
+digraph "Máquina de Turing que aceita sequências do tipo 01*0" {
 	graph [rankdir=LR]
 	node [shape=circle]
 	edge [arrowhead=vee arrowsize=1]

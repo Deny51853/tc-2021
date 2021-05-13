@@ -14,6 +14,7 @@ class Automato(models.Model):
     estadosAceitacao = models.CharField(max_length=100)
     dicTransicoes = models.CharField(max_length=1000)
     diagrama = models.CharField(max_length=100)
+    filename = models.CharField(max_length=100)
 
     def __str__(self):
         return self.descricao
@@ -68,8 +69,8 @@ class Automato(models.Model):
             d.edge(transicao[0], transicao[2], label = transicao[1])
 
         d.format = 'svg'
-        self.diagrama = f"website/images/afd/{str(self.nome).replace(' ', '_')}.svg"
-        d.render(f"website/static/website/images/afd/{str(self.nome).replace(' ', '_')}")
+        self.diagrama = f"website/images/afd/{self.filename}.svg"
+        d.render(f"website/static/website/images/afd/{self.filename}")
 
     def validarSequencia(self, sequencia):
         estado = self.estadoInicial
@@ -116,6 +117,7 @@ class MaquinaTuring(models.Model):
     dicTransicoes = models.CharField(max_length=1000)
     diagrama = models.CharField(max_length=100)
     sequenciaFinal = models.CharField(max_length=100)
+    filename = models.CharField(max_length=100)
 
     def __str__(self):
         return self.descricao
@@ -146,7 +148,7 @@ class MaquinaTuring(models.Model):
                 encontrado = False
                 for dicEstado, dicSimbolo in dicTransicoes:
                     if dicSimbolo[0] == simbolo and dicEstado == estado:
-                        linha.append(dicTransicoes[(estado, dicSimbolo)])
+                        linha.append(dicSimbolo[1] + dicSimbolo[2] + " -> " + dicTransicoes[(estado, dicSimbolo)])
                         encontrado = True
                         break
                 if encontrado == False:
@@ -173,13 +175,22 @@ class MaquinaTuring(models.Model):
 
         d.edge('Start', self.estadoInicial)
 
-        for transicao_comma in self.dicTransicoes.split():
-            transicao = transicao_comma.split('-')
-            d.edge(transicao[0], transicao[2], label = transicao[1])
+        dicTransicoes = {}
+        for item in self.dicTransicoes.split():
+            transicao = item.split('-')
+            "A-01R-B"
+            "A", "01R", "B"
+            if (transicao[0], transicao[2]) not in dicTransicoes.keys():
+                dicTransicoes[(transicao[0], transicao[2])] = transicao[1]
+            else:
+                dicTransicoes[(transicao[0], transicao[2])] = dicTransicoes[(transicao[0], transicao[2])] + ", " + transicao[1]
+
+        for estados in dicTransicoes:
+            d.edge(estados[0], estados[1], label = dicTransicoes[estados])
 
         d.format = 'svg'
-        self.diagrama = f"website/images/mt/{str(self.nome).replace(' ', '_')}.svg"
-        d.render(f"website/static/website/images/mt/{str(self.nome).replace(' ', '_')}")
+        self.diagrama = f"website/images/mt/{self.filename}.svg"
+        d.render(f"website/static/website/images/mt/{self.filename}")
 
     def validarSequencia(self, sequencia):
         estadoAtual = self.estadoInicial

@@ -1,4 +1,4 @@
-digraph teste {
+digraph "Autómato finito determinístico que aceita sequências que terminem em 0" {
 	graph [rankdir=LR]
 	node [shape=circle]
 	edge [arrowhead=vee arrowsize=1]

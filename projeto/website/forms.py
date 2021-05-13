@@ -9,7 +9,7 @@ class FormAutomato(ModelForm):
     class Meta:
         model = Automato
         fields = '__all__'
-        exclude = ['diagrama']
+        exclude = ['diagrama', 'filename']
 
         widgets = {
             'nome': forms.TextInput(attrs={'class': 'form-control'}),
@@ -58,7 +58,7 @@ class FormExpressaoRegular(ModelForm):
 
         widgets = {
             'nome': forms.TextInput(attrs={'class': 'form-control'}),
-            'descricao': forms.TextInput(attrs={'class': 'form-control', 'placeholder':'Expressao regular que valida...'}),
+            'descricao': forms.TextInput(attrs={'class': 'form-control', 'placeholder':'Expressão regular que valida...'}),
             'regex': forms.TextInput(attrs={'class': 'form-control'})
         }
 
@@ -84,7 +84,7 @@ class FormMaquinaTuring(ModelForm):
     class Meta:
         model = MaquinaTuring
         fields = '__all__'
-        exclude = ['diagrama', 'sequenciaFinal']
+        exclude = ['diagrama', 'sequenciaFinal', 'filename']
 
         widgets = {
             'nome': forms.TextInput(attrs={'class': 'form-control'}),

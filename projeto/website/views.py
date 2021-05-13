@@ -18,6 +18,7 @@ def novoAutomato(request):
     form = FormAutomato(request.POST or None)
     if form.is_valid():
         novoAutomato = form.save()
+        novoAutomato.filename = str(novoAutomato.nome).replace(' ', '_')
         novoAutomato.desenharDiagrama()
         novoAutomato.save()
         return HttpResponseRedirect(reverse('website:automatosFinitos'))
@@ -48,6 +49,9 @@ def editarAutomato(request, automato_id):
     form = FormAutomato(request.POST or None, instance=instance)
     if form.is_valid():
         automato = form.save()
+        os.rename(f"website/static/website/images/afd/{automato.filename}", f"website/static/website/images/afd/{str(automato.nome).replace(' ', '_')}")
+        os.rename(f"website/static/website/images/afd/{automato.filename}.svg", f"website/static/website/images/afd/{str(automato.nome).replace(' ', '_')}.svg")
+        automato.filename = str(automato.nome).replace(' ', '_')
         automato.desenharDiagrama()
         automato.save()
         return HttpResponseRedirect(reverse('website:automatosFinitos'))
@@ -56,10 +60,9 @@ def editarAutomato(request, automato_id):
     return render(request, 'website/editarAutomato.html', context)
 
 def apagarAutomato(request, automato_id):
-    automato = Automato.objects.get(id=automato_id)
-    filename = str(automato.nome).replace(' ', '_')
-    os.remove(f"website/static/website/images/afd/{filename}.svg")
-    os.remove(f"website/static/website/images/afd/{filename}")
+    automato = MaquinaTuring.objects.get(id=automato_id)
+    os.remove(f"website/static/website/images/afd/{str(automato.filename).replace(' ', '_')}.svg")
+    os.remove(f"website/static/website/images/afd/{str(automato.filename).replace(' ', '_')}")
     Automato.objects.filter(id=automato_id).delete()
     context = {'automatosFinitos': Automato.objects.all()}
     return render(request, 'website/automatosFinitos.html', context)
@@ -120,6 +123,7 @@ def novaMaquina(request):
     form = FormMaquinaTuring(request.POST or None)
     if form.is_valid():
         novaMaquina = form.save()
+        novaMaquina.filename = str(novaMaquina.nome).replace(' ', '_')
         novaMaquina.desenharDiagrama()
         novaMaquina.save()
         return HttpResponseRedirect(reverse('website:maquinasTuring'))
@@ -152,6 +156,9 @@ def editarMaquina(request, maquina_id):
     form = FormMaquinaTuring(request.POST or None, instance=instance)
     if form.is_valid():
         maquina = form.save()
+        os.rename(f"website/static/website/images/mt/{maquina.filename}", f"website/static/website/images/mt/{str(maquina.nome).replace(' ', '_')}")
+        os.rename(f"website/static/website/images/mt/{maquina.filename}.svg", f"website/static/website/images/mt/{str(maquina.nome).replace(' ', '_')}.svg")
+        maquina.filename = str(maquina.nome).replace(' ', '_')
         maquina.desenharDiagrama()
         maquina.save()
         return HttpResponseRedirect(reverse('website:maquinasTuring'))
@@ -161,9 +168,8 @@ def editarMaquina(request, maquina_id):
 
 def apagarMaquina(request, maquina_id):
     maquina = MaquinaTuring.objects.get(id=maquina_id)
-    filename = str(maquina.nome).replace(' ', '_')
-    os.remove(f"website/static/website/images/mt/{filename}.svg")
-    os.remove(f"website/static/website/images/mt/{filename}")
+    os.remove(f"website/static/website/images/mt/{str(maquina.filename).replace(' ', '_')}.svg")
+    os.remove(f"website/static/website/images/mt/{str(maquina.filename).replace(' ', '_')}")
     MaquinaTuring.objects.filter(id=maquina_id).delete()
     context = {'maquinasTuring': MaquinaTuring.objects.all()}
     return render(request, 'website/maquinasTuring.html', context)
