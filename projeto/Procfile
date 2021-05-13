@@ -1,1 +1,1 @@
-web: guinicorn projeto-final-tc:app
+web: guinicorn website:app
