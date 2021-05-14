@@ -60,7 +60,7 @@ def editarAutomato(request, automato_id):
     return render(request, 'website/editarAutomato.html', context)
 
 def apagarAutomato(request, automato_id):
-    automato = MaquinaTuring.objects.get(id=automato_id)
+    automato = Automato.objects.get(id=automato_id)
     os.remove(f"website/static/website/images/afd/{str(automato.filename).replace(' ', '_')}.svg")
     os.remove(f"website/static/website/images/afd/{str(automato.filename).replace(' ', '_')}")
     Automato.objects.filter(id=automato_id).delete()
