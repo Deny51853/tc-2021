@@ -2,7 +2,7 @@
 
 {% block jumbotron %}
 <div class="jumbotron">
-    <h1 class="display-4">Detalhes da Expressão Regular</h1>
+    <h1 class="display-4" style="font-size: 3vw;">Detalhes da Expressão Regular</h1>
 </div>
 {% endblock %}
 
@@ -15,7 +15,7 @@
     <form action="{% url 'website:detalhesExpressao' expressao.id %}" method="POST">
         {% csrf_token %}
         <b>{{ form }}</b>
-        <input type="submit" value="Validar" class="btn btn-success">
+        <p><input type="submit" value="Validar" class="btn btn-success" style="margin-top: 10px;"></p>
     </form>
     {% if resultado != None %}
         {% if resultado == True %}

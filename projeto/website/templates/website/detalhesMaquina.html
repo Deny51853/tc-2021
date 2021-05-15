@@ -2,7 +2,7 @@
 
 {% block jumbotron %}
 <div class="jumbotron">
-    <h1 class="display-4">Detalhes da Máquina de Turing</h1>
+    <h1 class="display-4" style="font-size: 3vw;">Detalhes da Máquina de Turing</h1>
 </div>
 {% endblock %}
 
@@ -40,7 +40,7 @@
             </td>
             <td class="align-baseline">
                 {% load static %}
-                <img src="{% static maquina.diagrama %}" alt="">
+                <img src="{% static maquina.diagrama %}" style="max-width: 100%; height: auto;">
                 <p class="text-center">Diagrama de transições.</p>
             </td>
         </tr>
@@ -51,7 +51,7 @@
             <form action="{% url 'website:detalhesMaquina' maquina.id %}" method="POST">
                 {% csrf_token %}
                 <b>{{ form }}</b>
-                <input type="submit" value="Validar" class="btn btn-success">
+                <p><input type="submit" value="Validar" class="btn btn-success" style="margin-top: 10px;"></p>
             </form>
             {% if resultado != None %}
                 {% if resultado == True %}

@@ -1,7 +1,7 @@
 {% extends 'website/layout.html' %}
 
 {% block jumbotron %}
-<div class="jumbotron">
+<div class="jumbotron" style="font-size: 3vw;">
     <h1 class="display-4">Máquinas de Turing</h1>
 </div>
 {% endblock %}
@@ -12,20 +12,20 @@
         Crie uma Máquina de Turing
     </a>
     <p style="margin-top: 20px;">Apresentam-se em baixo as máquinas de turing que foram criadas.</p>
-    <table align="center" class="table" style="table-layout: fixed; width:900px;">
+    <table align="center" class="table" style="table-layout: fixed; 80%">
         <tr>
-            <th class="text-center" style="width:400px;">Diagrama de Estados</th>
-            <th class="text-center" style="width:500px;">Descrição</th>
+            <th class="text-center" style="width:40%;">Diagrama de Estados</th>
+            <th class="text-center" style="width:60%;">Descrição</th>
         </tr>
         {% load static %}
         {% for maquina in maquinasTuring %}
             <tr class="text-left">
-                <td style="vertical-align: middle; width:400px;">
+                <td style="vertical-align: middle; width:40%;">
                     <a href="{% url 'website:detalhesMaquina' maquina.id %}">
                         <img src="{% static maquina.diagrama %}" width="80%">
                     </a>
                 </td>
-                <td style="vertical-align: middle; width:500px;">
+                <td style="vertical-align: middle; width:60%;">
                     <p>{{ maquina.descricao }}</p>
                     <p>
                         <div class="row">

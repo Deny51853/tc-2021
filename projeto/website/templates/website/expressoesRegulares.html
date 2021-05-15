@@ -2,7 +2,7 @@
 
 {% block jumbotron %}
 <div class="jumbotron">
-    <h1 class="display-4">Expressões Regulares</h1>
+    <h1 class="display-4" style="font-size: 3vw;">Expressões Regulares</h1>
 </div>
 {% endblock %}
 
@@ -12,20 +12,20 @@
         Crie uma Expressão Regular
     </a>
     <p style="margin-top: 20px;">Apresentam-se em baixo as expressões que foram criadas.</p>
-    <table align="center" class="table" style="table-layout: fixed; width: 900px">
+    <table align="center" class="table" style="table-layout: fixed; width: 80%;">
         <tr>
-            <th class="text-center" style="width: 400px;">Expressão Regular</th>
-            <th class="text-center" style="width: 500px;">Descrição</th>
+            <th class="text-center" style="width: 40%;">Expressão Regular</th>
+            <th class="text-center" style="width:60%;">Descrição</th>
         </tr>
         {% load static %}
         {% for expressao in expressoesRegulares %}
             <tr class="text-left">
-                <td style="vertical-align: middle; width: 400px;">
+                <td style="vertical-align: middle; width: 40%;">
                     <a href="{% url 'website:detalhesExpressao' expressao.id %}" class="text-center" style="vertical-align:center;">
                         <p width="80%"><b>{{ expressao.regex }}</b></p>
                     </a>
                 </td>
-                <td style="vertical-align: middle; width: 500px;">
+                <td style="vertical-align: middle; width:60%;">
                     <p>{{ expressao.descricao }}</p>
                     <p>
                         <div class="row">

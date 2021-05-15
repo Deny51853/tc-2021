@@ -2,14 +2,14 @@
 
 {% block jumbotron %}
 <div class="jumbotron">
-    <h1 class="display-4">Início</h1>
+    <h1 class="display-4" style="font-size: 3vw;">Início</h1>
 </div>
 {% endblock %}
 
 {% block main %}
 <main class="container text-center">
     {% load static %}
-    <img src="{% static 'website/images/indexTC.png' %}" style="margin-bottom: 20px;">
+    <img src="{% static 'website/images/indexTC.png' %}" style="max-width: 100%; height: auto; margin-bottom: 20px;">
     <p>A teoria da computação é um subcampo da ciência da computação e matemática que procura determinar que problemas podem ser computados 
     num dado modelo de computação. A computação pode ser definida como a solução de um problema ou, formalmente, o cálculo de uma função 
     por meio de um algoritmo. Apesar de intuitivo na história humana, o conceito de execução de uma tarefa com passos finitos 

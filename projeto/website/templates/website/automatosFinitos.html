@@ -2,7 +2,7 @@
 
 {% block jumbotron %}
 <div class="jumbotron">
-    <h1 class="display-4">Autómatos Finitos Determinísticos</h1>
+    <h1 class="display-4" style="font-size: 3vw;">Autómatos Finitos Determinísticos</h1>
 </div>
 {% endblock %}
 
@@ -12,20 +12,20 @@
         Crie um Autómato Finito Determinístico
     </a>
     <p style="margin-top: 20px;">Apresentam-se em baixo os autómatos finitos determinísticos que foram criados.</p>
-    <table align="center" class="table" style="table-layout: fixed; width:900px;">
+    <table align="center" class="table" style="table-layout: fixed; width: 80%;">
         <tr>
-            <th class="text-center" style="width:400px;">Diagrama de Estados</th>
-            <th class="text-center" style="width:500px;">Descrição</th>
+            <th class="text-center" style="width: 40%;">Diagrama de Estados</th>
+            <th class="text-center" style="width: 60%;">Descrição</th>
         </tr>
         {% load static %}
         {% for automato in automatosFinitos %}
         <tr class="text-left">
-            <td style="vertical-align: middle; width: 400px;">
+            <td style="vertical-align: middle; width: 40%;">
                 <a href="{% url 'website:detalhesAutomato' automato.id %}">
                     <img src="{% static automato.diagrama %}" width="80%">
                 </a>
             </td>
-            <td style="vertical-align: middle; width:500px;">
+            <td style="vertical-align: middle; width: 60%;">
                 <p>{{ automato.descricao }}</p>
                 <p>
                     <div class="row">
