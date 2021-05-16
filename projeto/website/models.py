@@ -178,8 +178,7 @@ class MaquinaTuring(models.Model):
         dicTransicoes = {}
         for item in self.dicTransicoes.split():
             transicao = item.split('-')
-            "A-01R-B"
-            "A", "01R", "B"
+
             if (transicao[0], transicao[2]) not in dicTransicoes.keys():
                 dicTransicoes[(transicao[0], transicao[2])] = transicao[1]
             else:
